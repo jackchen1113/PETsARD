@@ -30,7 +30,7 @@ Synthesizer:
   petsard-gaussian-copula:
     method: petsard-gaussian-copula
     sample_num_rows: 1000  # 生成列數，預設為訓練資料列數
-    use_gpu: auto          # 設備選擇，預設 auto（自動）
+    use_gpu: false         # 在 AMD / 非 NVIDIA 環境下強制使用 CPU
     gpu_threshold: 50000   # auto 模式閾值，預設 50,000
 
   sdv_gaussiancopula:
