@@ -77,14 +77,40 @@
 
 ### Quick Start 快速開始
 
-```bash
-# Install 安裝
-pip install petsard
+#### Install from PyPI / 從 PyPI 安裝
 
-# Run tests 執行測試
-pip install petsard[dev]
+```bash
+pip install petsard
+```
+
+#### Local development / 本地開發
+
+```bash
+# Create an isolated environment / 建立隔離環境
+conda create -n petsard python=3.11 -y
+conda activate petsard
+
+# Install PETsARD and development tools / 安裝 PETsARD 與開發工具
+python -m pip install --upgrade pip
+pip install -e ".[dev]"
+
+# Run tests / 執行測試
 pytest
 ```
+
+#### Optional extras / 可選額外功能
+
+```bash
+# Include Jupyter / notebook support / 包含 Jupyter / notebook 支援
+pip install -e ".[all]"
+```
+
+### Notes / 注意事項
+
+- PETsARD officially supports Python 3.10 and 3.11. Please avoid Python 3.12+ for now. / 本專案官方支援 Python 3.10 與 3.11，暫時請避免使用 Python 3.12+。
+- For local development, run `pip install -e ".[dev]"` in the project root so PETsARD and its development tools are installed together. / 本地開發時，請在專案根目錄執行 `pip install -e ".[dev]"`，讓 PETsARD 與開發工具一起安裝。
+- On Windows, if the repository path contains non-ASCII characters such as `OneDrive/文件`, some conda environments may fail to import `site` during Python startup. A practical workaround is to place the project in an ASCII-only path such as `C:\PETsARD`. / 在 Windows 上，如果專案路徑包含非 ASCII 字元（例如 `OneDrive/文件`），部分 conda 環境可能會在 Python 啟動時發生 `site` 匯入錯誤。實務上可將專案放到 `C:\PETsARD` 這類純 ASCII 路徑。
+- After activation, verify the environment with `python -c "import petsard; print('PETsARD ready')"`. / 啟用環境後，可用 `python -c "import petsard; print('PETsARD ready')"` 驗證 PETsARD 是否已成功載入。
 
 ---
 
