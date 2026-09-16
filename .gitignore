@@ -33,6 +33,7 @@ dist/
 
 # 環境與虛擬環境 Environment and virtual environments
 **/*{env,venv}
+**/.venv/
 **/.python-version
 
 # 套件管理 Package management

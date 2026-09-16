@@ -1,0 +1,66 @@
+---
+Executor:
+  log_output_type: 'both'
+  log_level: 'INFO'
+  log_dir: './'
+  log_filename: 'PETsARD_{timestamp}.log'
+Loader:
+  load_citizens:
+    filepath: 'citizens.csv'
+Splitter:
+  basic_split:
+    num_samples: 1
+    train_split_ratio: 0.8
+Preprocessor:
+  default:
+    method: 'default'
+Synthesizer:
+  gaussian_copula:
+    method: 'default'  # built-in petsard-gaussian_copula
+    sample_num_rows: 10000
+Postprocessor:
+  default:
+    method: 'default'
+Evaluator:
+  validity_check:
+    method: sdmetrics-diagnosticreport
+  fidelity_check:
+    method: sdmetrics-qualityreport
+  singling_out_risk:
+    method: anonymeter-singlingout
+  linkability_risk:
+    method: anonymeter-linkability
+    aux_cols:
+      -
+        - city
+        - gender
+        - education
+      -
+        - marital_status
+        - occupation
+        - household_size
+    n_jobs: 1
+  inference_risk:
+    method: 'anonymeter-inference'
+    secret: 'marital_status'
+    aux_cols:
+      - occupation
+      - education
+      - gender
+    n_jobs: 1
+  classification_utility:
+    method: mlutility
+    task_type: classification
+    target: 'occupation'
+Reporter:
+  save_data:
+    method: 'save_data'
+    source: 'Postprocessor'
+  save_report:
+    method: 'save_report'
+    granularity:
+      - 'global'
+      - 'columnwise'
+      - 'pairwise'
+      - 'details'
+...
